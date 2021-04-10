@@ -1,0 +1,5 @@
+<div *ngIf="users$ | async as users">
+  <ng-container *ngFor="let user of users">
+    <app-list-user-item [user]="user"></app-list-user-item>
+  </ng-container>
+</div>
