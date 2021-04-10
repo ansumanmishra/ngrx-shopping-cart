@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../state/user.reducer';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../user';
 
 @Component({
   selector: 'app-list-user-item',
@@ -9,10 +9,14 @@ import {User} from '../state/user.reducer';
 export class ListUserItemComponent implements OnInit {
 
   @Input() user: User;
+  @Output() selectedUser: EventEmitter<User> = new EventEmitter<User>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  selectUser(user: User): void {
+    this.selectedUser.emit(user);
+  }
 }

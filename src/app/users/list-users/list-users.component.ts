@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {UserActions} from '../state/actions';
 import {Observable} from 'rxjs';
-import {getUsers, User} from '../state/user.reducer';
+import {getSelectedtUser, getUsers} from '../state/user.reducer';
+import {User} from '../user';
 
 @Component({
   selector: 'app-list-users',
@@ -11,6 +12,7 @@ import {getUsers, User} from '../state/user.reducer';
 })
 export class ListUsersComponent implements OnInit {
   users$: Observable<User[]>;
+  selectedUser$: Observable<User>;
 
   constructor(private readonly store: Store) {
     this.store.dispatch(UserActions.loadUsers());
@@ -18,6 +20,10 @@ export class ListUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.users$ = this.store.select(getUsers);
+    this.selectedUser$ = this.store.select(getSelectedtUser);
   }
 
+  selectUser(user: User): void {
+    this.store.dispatch(UserActions.selectUser({userId: user.id}));
+  }
 }

@@ -1,5 +1,9 @@
 <div *ngIf="users$ | async as users">
   <ng-container *ngFor="let user of users">
-    <app-list-user-item [user]="user"></app-list-user-item>
+    <app-list-user-item [user]="user" (selectedUser)="selectUser($event)"></app-list-user-item>
   </ng-container>
 </div>
+
+<ng-container *ngIf="selectedUser$ | async as selectedUser">
+  <p>Selected User: {{selectedUser.first_name}}</p>
+</ng-container>

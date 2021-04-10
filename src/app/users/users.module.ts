@@ -5,6 +5,8 @@ import {AddUserComponent} from './add-user/add-user.component';
 import {ListUserItemComponent} from './list-user-item/list-user-item.component';
 import {StoreModule} from '@ngrx/store';
 import {userReducer} from './state/user.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import {UserEffects} from './state/user.effects';
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import {userReducer} from './state/user.reducer';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature('users', userReducer)
+    StoreModule.forFeature('users', userReducer),
+    EffectsModule.forFeature([UserEffects]),
   ],
   exports: [ListUsersComponent,
     AddUserComponent,
